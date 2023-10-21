@@ -17,26 +17,36 @@ typedef struct ANTANCS
 
 antancs *insertedge(antancs *graph, int i, int j, const char to[20], const char from[20], double weight)
 {
-    strcpy(graph->adjacency_list[i][j]->src, from);
-    strcpy(graph->adjacency_list[i][j]->dst, to);
-    graph->adjacency_list[i][j]->weight = weight;
+    node *new_node = (node *)malloc(sizeof(node));
+    if (new_node == NULL)
+    {
+        
+        printf("Memory allocation error\n");
+        return graph;
+    }
+    
+    strcpy(new_node->src, from);
+    strcpy(new_node->dst, to);
+    new_node->weight = weight;
+    
+    graph->adjacency_list[i][j] = new_node; 
     return graph;
 }
 
 antancs *putdata(antancs *graph, FILE *fp)
 {
-
     if (fp == NULL)
     {
         printf("Error opening the file");
         return graph;
     }
+    
     char line[50];
     for (int i = 0; i < graph->V; i++)
     {
         for (int j = 0; j < graph->V; j++)
         {
-            while (fgets(line, sizeof(line), fp))
+            if (fgets(line, sizeof(line), fp))
             {
                 int column_count = 0;
                 char *token = strtok(line, ",");
@@ -59,11 +69,12 @@ antancs *putdata(antancs *graph, FILE *fp)
                         weight = strtod(token, NULL);
                     }
                     token = strtok(NULL, ",");
-                    insertedge(graph, i, j, to, from, weight);
                 }
+                insertedge(graph, i, j, to, from, weight);
             }
         }
     }
     return graph;
 }
+
 
