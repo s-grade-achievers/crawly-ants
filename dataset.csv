@@ -1,0 +1,45 @@
+origin_city, neighbour_city, response_time
+delhi, mumbai, 27.45, chennai, 39.79, moscow, 197.51
+mumbai, dubai, 235.00, nairobi, 246.16, delhi, 27.45, singapore, 64.96, cairo, 165.33
+singapore, chennai, 33.73, mumbai, 64.96, Kuala Lumpur, 12.17, jakarta, 13.36, hongKong, 36.95, taiwan, 57.76, tokyo, 77.63, perth, 209.34, los angeles, 242.03
+chennai, delhi, 39.79, singapore, 33.73
+Kuala Lumpur, singapore, 12.17
+jakarta, singapore, 13.36, los angeles, 186.64
+hongKong, singapore, 36.95, taiwan, 23.82, osaka, 59.44, tokyo, 47.02, seoul, 60.35
+taiwan, hongKong, 23.82, osaka, 38.49, tokyo, 50.52, los angeles,128.85, seattle, 126.45
+seoul, osaka, 39.42, tokyo, 33.52, hongKong, 60.35
+tokyo, osaka, 8.76, seoul, 33.52, hongKonge, 47.02, taiwan, 50.52, singapore, 77.63, melbourne, 124.12, seattle, 118.32, los angeles, 107.10
+osaka, tokyo, 8.76, seoul, 39.42, hongKonge, 59.44, taiwan, 38.49, los angeles, 129.42
+perth, singapo, 209.34, melbourne, 37.00
+melbourne, perth, 37.00, tokyo, 124.12, los angeles, 187.68
+dubai, mumbai, 235.00, telAviv, 165.18, nairobi, 243.07, cairo, 161.15
+nairobi, mumbai, 246.16, dubai, 243.07, johannesburg, 60.81, cairo, 216.17
+telAviv, cairo, 106.36, dubai, 165.18
+cairo, dubai, 161.15, telAviv, 106.36, mumbai, 165.33, nairobi, 216.17, milan, 45.15, geneva, 51.19, marseille, 37.29
+johannesburg, nairobi, 60.81, lisbon, 171.13, marseille, 152.82
+lisbon, johannesburg, 171.13, madrid, 14.81
+madrid, lisbon, 14.81, paris, 17.75, geneva, 26.49, marseille, 16.24, milan, 24.22
+paris, madrid, 17.75, london, 8.05, brussels, 6.15, frankfurt, 10.30, milan, 21.74, geneva, 21.40, marseille, 12.10, new york, 78.22
+london, paris, 8.05, brussels, 11.79, dublin, 10.89, new york, 72.95, montreal, 80.25
+brussels, london, 11.79, paris, 6.15, berlin, 18.38, frankfurt, 7.68, milan, 23.55, geneva, 16.22
+geneva, cairo, 51.19, madrid, 26.49, paris, 21.40, brussels, 16.22, milan, 17.41, marseille, 20.87, frankfurt, 14.10, berlin, 16.89
+milan, cairo, 45.15, madrid, 24.22, paris, 21.74, brussels, 23.55, geneva, 17.41, berlin, 23.94, warsaw, 30.71, moscow, 49.68, marseille, 10.33
+marseille, cairo, 37.29, johannesburg, 152.82, madrid, 16.24, paris, 12.10, geneva, 20.87, milan, 10.33
+frankfurt, paris, 10.30, brussels, 7.68, geneva, 14.10, berlin, 25.20, warsaw, 17.10
+berlin, brussels, 118.38, geneva, 16.89, milan, 23.94, frankfurt, 25.20, warsaw, 25.16, moscow, 52.79, stockholm, 28.99, new york, 90.24
+warsaw, milan, 30.71, frankfurt, 17.10, berlin, 25.16, moscow, 59.47, stockholm, 41.85
+moscow, milan, 49.68, berlin, 52.79, warsaw, 59.47, stockholm, 59.17, delhi, 197.51
+stockholm, berlin, 28.99, warsaw, 41.85, moscow, 59.17
+dublin, london, 10.89, new york, 77.45, montreal, 75.30
+new york, paris, 78.22, london, 72.95, berlin, 90.24, dublin, 77.45, montreal, 8.98, des moines, 27.34, miami, 31.34, dallas, 44.30
+montreal, london, 80.25, dubai, 75.30, new york, 8.98, des moines, 34.28, seattle, 65.65
+des moines, new york, 27.34, montreal, 34.28, miami, 39.67, dallas, 21.25, los angeles, 68.26, seattle, 48.46
+seattle, taiwan, 126.45, tokyo, 118.32, montreal, 65.65, des moines, 48.46, los angeles, 48.15
+dallas, new york, 44.30, des moines, 21.25, miami, 32.48, mexico, 25.15, los angeles, 66.42
+miami, new york, 31.34, des moines, 39.67, dallas, 32.48, caracas, 54.36, mexico, 54.36, sao paulo, 105.45
+mexico, dallas, 25.15, miami, 54.36, sao paulo, 166.65, los angeles, 81.65, caracas, 91.21
+caracas, miami, 54.36, mexico, 91.21, sao paulo, 128.32, los angeles, 128.44
+sao paulo, miami, 105.45, mexico, 166.65, caracas, 128.32, santiago, 47.73
+santiago, sao paulo, 47.73, los angeles, 176.47
+los angeles, singapore, 242.03, jakarta, 186.64, taiwan, 128.85, osaka, 129.42, tokyo, 107.10, melbourne, 187.68, seattle, 48.15, des moines, 68.26, dallas, 66.42, mexico, 81.65, santiago, 176.47, caracas, 128.44
+
