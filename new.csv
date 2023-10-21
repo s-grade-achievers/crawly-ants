@@ -1,0 +1,256 @@
+delhi,mumbai,27.45
+delhi,chennai,39.79
+delhi,moscow,197.51
+
+mumbai,dubai,235.00
+mumbai,nairobi,246.16
+mumbai,delhi,27.45
+mumbai,singapore,64.96
+mumbai,cairo,165.33
+
+singapore,chennai,33.73
+singapore,mumbai,64.96
+singapore,Kuala Lumpur,12.17
+singapore,jakarta,13.36
+singapore,hongKong,36.95
+singapore,taiwan,57.76
+singapore,tokyo,77.63
+singapore,perth,209.34
+singapore,los angeles,242.03
+
+chennai,delhi,39.79
+chennai,singapore,33.73
+
+Kuala Lumpur,singapore,12.17
+
+jakarta,singapore,13.36
+jakarta,los angeles,186.64
+
+hongKong,singapore,36.95
+hongKong,taiwan,23.82
+hongKong,osaka,59.44
+hongKong,tokyo,47.02
+hongKong,seoul,60.35
+
+taiwan,hongKong,23.82
+taiwan,osaka,38.49
+taiwan,tokyo,50.52
+taiwan,los angeles,128.85
+taiwan,seattle,126.45
+
+seoul,osaka,39.42
+seoul,tokyo,33.52
+seoul,hongKong,60.35
+
+tokyo,osaka,8.76
+tokyo,seoul,33.52
+tokyo,hongKonge,47.02
+tokyo,taiwan,50.52
+tokyo,singapore,77.63
+tokyo,melbourne,124.12
+tokyo,seattle,118.32
+tokyo,los angeles,107.10
+
+osaka,tokyo,8.76
+osaka,seoul,39.42
+osaka,hongKonge,59.44
+osaka,taiwan,38.49
+osaka,los angeles,129.42
+
+perth,singapo,209.34
+perth,melbourne,37.00
+
+melbourne,perth,37.00
+melbourne,tokyo,124.12
+melbourne,los angeles,187.68
+
+dubai,mumbai,235.00
+dubai,telAviv,165.18
+dubai,nairobi,243.07
+dubai,cairo,161.15
+
+nairobi,mumbai,246.16
+nairobi,dubai,243.07
+nairobi,johannesburg,60.81
+nairobi,cairo,216.17
+
+telAviv,cairo,106.36
+telAviv,dubai,165.18
+
+cairo,dubai,161.15
+cairo,telAviv,106.36
+cairo,mumbai,165.33
+cairo,nairobi,216.17
+cairo,milan,45.15
+cairo,geneva,51.19
+cairo,marseille,37.29
+
+johannesburg,nairobi,60.81
+johannesburg,lisbon,171.13
+johannesburg,marseille,152.82
+
+lisbon,johannesburg,171.13
+lisbon,madrid,14.81
+
+madrid,lisbon,14.81
+madrid,paris,17.75
+madrid,geneva,26.49
+madrid,marseille,16.24
+madrid,milan,24.22
+
+paris,madrid,17.75
+paris,london,8.05
+paris,brussels,6.15
+paris,frankfurt,10.30
+paris,milan,21.74
+paris,geneva,21.40
+paris,marseille,12.10
+paris,new york,78.22
+
+london,paris,8.05
+london,brussels,11.79
+london,dublin,10.89
+london,new york,72.95
+london,montreal,80.25
+
+brussels,london,11.79
+brussels,paris,6.15
+brussels,berlin,18.38
+brussels,frankfurt,7.68
+brussels,milan,23.55
+brussels,geneva,16.22
+
+geneva,cairo,51.19
+geneva,madrid,26.49
+geneva,paris,21.40
+geneva,brussels,16.22
+geneva,milan,17.41
+geneva,marseille,20.87
+geneva,frankfurt,14.10
+geneva,berlin,16.89
+
+milan,cairo,45.15
+milan,madrid,24.22
+milan,paris,21.74
+milan,brussels,23.55
+milan,geneva,17.41
+milan,berlin,23.94
+milan,warsaw,30.71
+milan,moscow,49.68
+milan,marseille,10.33
+
+marseille,cairo,37.29
+marseille,johannesburg,152.82
+marseille,madrid,16.24
+marseille,paris,12.10
+marseille,geneva,20.87
+marseille,milan,10.33
+
+frankfurt,paris,10.30
+frankfurt,brussels,7.68
+frankfurt,geneva,14.10
+frankfurt,berlin,25.20
+frankfurt,warsaw,17.10
+
+berlin,brussels,118.38
+berlin,geneva,16.89
+berlin,milan,23.94
+berlin,frankfurt,25.20
+berlin,warsaw,25.16
+berlin,moscow,52.79
+berlin,stockholm,28.99
+berlin,new york,90.24
+
+warsaw,milan,30.71
+warsaw,frankfurt,17.10
+warsaw,berlin,25.16
+warsaw,moscow,59.47
+warsaw,stockholm,41.85
+
+moscow,milan,49.68
+moscow,berlin,52.79
+moscow,warsaw,59.47
+moscow,stockholm,59.17
+moscow,delhi,197.51
+
+stockholm,berlin,28.99
+stockholm,warsaw,41.85
+stockholm,moscow,59.17
+
+dublin,london,10.89
+dublin,new york,77.45
+dublin,montreal,75.30
+
+new york,paris,78.22
+new york,london,72.95
+new york,berlin,90.24
+new york,dublin,77.45
+new york,montreal,8.98
+new york,des moines,27.34
+new york,miami,31.34
+new york,dallas,44.30
+
+montreal,london,80.25
+montreal,dubai,75.30
+montreal,new york,8.98
+montreal,des moines,34.28
+montreal,seattle,65.65
+
+des moines,new york,27.34
+des moines,montreal,34.28
+des moines,miami,39.67
+des moines,dallas,21.25
+des moines,los angeles,68.26
+des moines,seattle,48.46
+
+seattle,taiwan,126.45
+seattle,tokyo,118.32
+seattle,montreal,65.65
+seattle,des moines,48.46
+seattle,los angeles,48.15
+
+dallas,new york,44.30
+dallas,des moines,21.25
+dallas,miami,32.48
+dallas,mexico,25.15
+dallas,los angeles,66.42
+
+miami,new york,31.34
+miami,des moines,39.67
+miami,dallas,32.48
+miami,caracas,54.36
+miami,mexico,54.36
+miami,sao paulo,105.45
+
+mexico,dallas,25.15
+mexico,miami,54.36
+mexico,sao paulo,166.65
+mexico,los angeles,81.65
+mexico,caracas,91.21
+
+caracas,miami,54.36
+caracas,mexico,91.21
+caracas,sao paulo,128.32
+caracas,los angeles,128.44
+
+sao paulo,miami,105.45
+sao paulo,mexico,166.65
+sao paulo,caracas,128.32
+sao paulo,santiago,47.73
+
+santiago,sao paulo,47.73
+santiago,los angeles,176.47
+
+los angeles,singapore,242.03
+los angeles,jakarta,186.64
+los angeles,taiwan,128.85
+los angeles,osaka,129.42
+los angeles,tokyo,107.10
+los angeles,melbourne,187.68
+los angeles,seattle,48.15
+los angeles,des moines,68.26
+los angeles,dallas,66.42
+los angeles,mexico,81.65
+los angeles,santiago,176.47
+los angeles,caracas,128.44
+
