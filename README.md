@@ -1,2 +1,2 @@
 # crawly-ants
-We build ants, they crawl accross the world anc connect you quickly quickly to your loved ones. 
+We build ants, they crawl across the world and connect you quickly quickly to your loved ones. 
