@@ -60,11 +60,11 @@ antancs *putdata(antancs *graph, FILE *fp)
                     {
                         strncpy(to, token, sizeof(to));
                     }
-                    else if (column_count == 2)
+                    else if (column_count%2 == 0)
                     {
                         strncpy(from, token, sizeof(from));
                     }
-                    else if (column_count == 3)
+                    else if (column_count%3 == 0)
                     {
                         weight = strtod(token, NULL);
                     }
