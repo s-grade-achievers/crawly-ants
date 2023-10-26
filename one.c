@@ -14,7 +14,7 @@ typedef struct NODE
 typedef struct ANTANCS
 {
     int V;
-    struct NODE *adjacency_list[50][50];
+    node *adjacency_list[50][50];
 } antancs;
 
 struct Ant
@@ -23,6 +23,13 @@ struct Ant
     int destination_node;
     // Add path history and other attributes.
 };
+
+
+
+typedef struct antliq{
+    int V;
+    node *phmatrix[50][50];
+}antliq;
 
 // Initialize network, pheromone levels, and ants.
 
@@ -63,30 +70,38 @@ antancs *putdata(antancs *graph, FILE *fp)
     return graph;
 }
 
-void initializePheromoneLevels(struct Link *links, int num_links)
+
+void initializePheromoneLevels(antliq *pheromone_matrix, antancs *graph)
 {
-    // Initialize pheromone levels on links.
+    for(int i = 0; i < pheromone_matrix->V;i++){
+        for(int j = 0; j < pheromone_matrix->V; j++){
+            graph->adjacency_list[i][j] = (node *)malloc(sizeof(node));
+            pheromone_matrix->phmatrix[i][j] = graph->adjacency_list[i][j];
+            pheromone_matrix->phmatrix[i][j]->weight = 1.0;
+        }
+    }
 }
+
 
 void initializeAnts(struct Ant *ants, int num_ants, int source_node, int destination_node)
 {
     // Initialize ants, set source and destination nodes, and other attributes.
 }
 
-// Main ACO algorithm.
+// // Main ACO algorithm.
 
-void acoAlgorithm(struct Node *nodes, int num_nodes, struct Link *links, int num_links, struct Ant *ants, int num_ants)
-{
-    int max_iterations = 100;
-    double evaporation_rate = 0.1;
-    double alpha = 1.0; // Pheromone influence.
-    double beta = 2.0;  // Heuristic influence.
+// void acoAlgorithm(struct Node *nodes, int num_nodes, struct Link *links, int num_links, struct Ant *ants, int num_ants)
+// {
+//     int max_iterations = 100;
+//     double evaporation_rate = 0.1;
+//     double alpha = 1.0; // Pheromone influence.
+//     double beta = 2.0;  // Heuristic influence.
 
-    for (int iteration = 1; iteration <= max_iterations; iteration++)
-    {
-        // Move ants, update pheromone levels, and perform other ACO operations.
-    }
-}
+//     for (int iteration = 1; iteration <= max_iterations; iteration++)
+//     {
+//         // Move ants, update pheromone levels, and perform other ACO operations.
+//     }
+// }
 
 int main()
 {
@@ -99,6 +114,11 @@ int main()
     antancs *graph = (antancs *)malloc(sizeof(antancs));
     graph->V = 50;
     putdata(graph, file);
+    antliq *phamtrix = (antliq *)malloc(sizeof(antliq));
+    phamtrix->V = 50;
+    initializePheromoneLevels(phamtrix, graph);
+
+
 
     return 0;
 }
