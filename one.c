@@ -17,14 +17,18 @@ typedef struct ANTANCS
     node *adjacency_list[50][50];
 } antancs;
 
-struct Ant
+typedef struct Ant
 {
     int current_node;
     int destination_node;
-    // Add path history and other attributes.
-};
+    float pathcost;
+    char pathhistory[50];
+}ant;
 
-
+typedef struct ANTS{
+    int num_ants;
+    ant *antarray[50];
+}antarray;
 
 typedef struct antliq{
     int V;
@@ -82,10 +86,13 @@ void initializePheromoneLevels(antliq *pheromone_matrix, antancs *graph)
     }
 }
 
-
-void initializeAnts(struct Ant *ants, int num_ants, int source_node, int destination_node)
+//ants will also have history and pathcost 
+void initializeAnts(antarray *ants)
 {
-    // Initialize ants, set source and destination nodes, and other attributes.
+    for(int i = 0; i <ants->num_ants ; i++){
+        ants->antarray[i] = (ant *)malloc(sizeof(ant));
+        ants->antarray[i]->pathcost = 0; 
+    }
 }
 
 // // Main ACO algorithm.
@@ -117,7 +124,7 @@ int main()
     antliq *phamtrix = (antliq *)malloc(sizeof(antliq));
     phamtrix->V = 50;
     initializePheromoneLevels(phamtrix, graph);
-
+    ants
 
 
     return 0;
