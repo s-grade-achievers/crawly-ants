@@ -1,75 +1,76 @@
-0delhi,1mumbai,27.45
-0delhi,3chennai,39.79
-0delhi,29moscow,197.51
 
-1mumbai,13dubai,235.00
-1mumbai,14nairobi,246.16
-1mumbai,0delhi,27.45
-1mumbai,2singapore,64.96
-1mumbai,16cairo,165.33
+00delhi,01mumbai,27.45
+00delhi,03chennai,39.79
+00delhi,29moscow,197.51
 
-2singapore,3chennai,33.73
-2singapore,1mumbai,64.96
-2singapore,4Kuala Lumpur,12.17
-2singapore,5jakarta,13.36
-2singapore,6hongKong,36.95
-2singapore,7taiwan,57.76
-2singapore,9tokyo,77.63
-2singapore,11perth,209.34
-2singapore,42los angeles,242.03
+01mumbai,13dubai,235.00
+01mumbai,14nairobi,246.16
+01mumbai,00delhi,27.45
+01mumbai,02singapore,64.96
+01mumbai,16cairo,165.33
 
-3chennai,0delhi,39.79
-3chennai,2singapore,33.73
+02singapore,03chennai,33.73
+02singapore,01mumbai,64.96
+02singapore,04Kuala Lumpur,12.17
+02singapore,05jakarta,13.36
+02singapore,06hongKong,36.95
+02singapore,07taiwan,57.76
+02singapore,09tokyo,77.63
+02singapore,11perth,209.34
+02singapore,42los angeles,242.03
 
-4Kuala Lumpur,2singapore,12.17
+03chennai,00delhi,39.79
+03chennai,02singapore,33.73
 
-5jakarta,2singapore,13.36
-5jakarta,42los angeles,186.64
+04Kuala Lumpur,02singapore,12.17
 
-6hongKong,2singapore,36.95
-6hongKong,7taiwan,23.82
-6hongKong,10osaka,59.44
-6hongKong,9tokyo,47.02
-6hongKong,8seoul,60.35
+05jakarta,02singapore,13.36
+05jakarta,42los angeles,186.64
 
-7taiwan,6hongKong,23.82
-7taiwan,10osaka,38.49
-7taiwan,9tokyo,50.52
-7taiwan,42los angeles,128.85
-7taiwan,35seattle,126.45
+06hongKong,02singapore,36.95
+06hongKong,07taiwan,23.82
+06hongKong,10osaka,59.44
+06hongKong,09tokyo,47.02
+06hongKong,08seoul,60.35
 
-8seoul,10osaka,39.42
-8seoul,9tokyo,33.52
-8seoul,6hongKong,60.35
+07taiwan,06hongKong,23.82
+07taiwan,10osaka,38.49
+07taiwan,09tokyo,50.52
+07taiwan,42los angeles,128.85
+07taiwan,35seattle,126.45
 
-9tokyo,10osaka,8.76
-9tokyo,8seoul,33.52
-9tokyo,6hongKong,47.02
-9tokyo,7taiwan,50.52
-9tokyo,2singapore,77.63
-9tokyo,12melbourne,124.12
-9tokyo,35seattle,118.32
-9tokyo,42los angeles,107.10
+08seoul,10osaka,39.42
+08seoul,09tokyo,33.52
+08seoul,06hongKong,60.35
 
-10osaka,9tokyo,8.76
-10osaka,8seoul,39.42
-10osaka,6hongKong,59.44
-10osaka,7taiwan,38.49
+09tokyo,10osaka,8.76
+09tokyo,08seoul,33.52
+09tokyo,06hongKong,47.02
+09tokyo,07taiwan,50.52
+09tokyo,02singapore,77.63
+09tokyo,12melbourne,124.12
+09tokyo,35seattle,118.32
+09tokyo,42los angeles,107.10
+
+10osaka,09tokyo,8.76
+10osaka,08seoul,39.42
+10osaka,06hongKong,59.44
+10osaka,07taiwan,38.49
 10osaka,42los angeles,129.42
 
-11perth,2singapore,209.34
+11perth,02singapore,209.34
 11perth,12melbourne,37.00
 
 12melbourne,11perth,37.00
-12melbourne,9tokyo,124.12
+12melbourne,09tokyo,124.12
 12melbourne,42los angeles,187.68
 
-13dubai,1mumbai,235.00
+13dubai,01mumbai,235.00
 13dubai,15telAviv,165.18
 13dubai,14nairobi,243.07
 13dubai,16cairo,161.15
 
-14nairobi,1mumbai,246.16
+14nairobi,01mumbai,246.16
 14nairobi,13dubai,243.07
 14nairobi,17johannesburg,60.81
 14nairobi,16cairo,216.17
@@ -79,7 +80,7 @@
 
 16cairo,13dubai,161.15
 16cairo,15telAviv,106.36
-16cairo,1mumbai,165.33
+16cairo,01mumbai,165.33
 16cairo,14nairobi,216.17
 16cairo,24milan,45.15
 16cairo,23geneva,51.19
@@ -171,7 +172,7 @@
 29moscow,27berlin,52.79
 29moscow,28warsaw,59.47
 29moscow,30stockholm,59.17
-29moscow,0delhi,197.51
+29moscow,00delhi,197.51
 
 30stockholm,27berlin,28.99
 30stockholm,28warsaw,41.85
@@ -203,8 +204,8 @@
 34des moines,42los angeles,68.26
 34des moines,35seattle,48.46
 
-35seattle,7taiwan,126.45
-35seattle,9tokyo,118.32
+35seattle,07taiwan,126.45
+35seattle,09tokyo,118.32
 35seattle,33montreal,65.65
 35seattle,34des moines,48.46
 35seattle,42los angeles,48.15
@@ -241,11 +242,11 @@
 41santiago,40sao paulo,47.73
 41santiago,42los angeles,176.47
 
-42los angeles,2singapore,242.03
-42los angeles,5jakarta,186.64
-42los angeles,7taiwan,128.85
+42los angeles,02singapore,242.03
+42los angeles,05jakarta,186.64
+42los angeles,07taiwan,128.85
 42los angeles,10osaka,129.42
-42los angeles,9tokyo,107.10
+42los angeles,09tokyo,107.10
 42los angeles,12melbourne,187.68
 42los angeles,35seattle,48.15
 42los angeles,34des moines,68.26

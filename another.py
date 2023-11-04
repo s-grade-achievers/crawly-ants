@@ -1,4 +1,4 @@
-f = open("new.csv", "r")
+f = open("depracated/new.csv", "r")
 f = f.read().split("\n")
 f = [i.split(",") for i in f if i != ""]
 # print(f)
@@ -13,9 +13,13 @@ j = open("newer.csv", "w")
 for i in f:
     if i[0] != m:
         j.write("\n")
+    if d[i[0]] < 10:
+        j.write("0")
     j.write(str(d[i[0]]))
     j.write(i[0])
     j.write(",")
+    if d[i[1]] < 10:
+        j.write("0")
     j.write(str(d[i[1]]))
     j.write(i[1])
     j.write(",")
