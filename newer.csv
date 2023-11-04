@@ -1,0 +1,255 @@
+0delhi,1mumbai,27.45
+0delhi,3chennai,39.79
+0delhi,29moscow,197.51
+
+1mumbai,13dubai,235.00
+1mumbai,14nairobi,246.16
+1mumbai,0delhi,27.45
+1mumbai,2singapore,64.96
+1mumbai,16cairo,165.33
+
+2singapore,3chennai,33.73
+2singapore,1mumbai,64.96
+2singapore,4Kuala Lumpur,12.17
+2singapore,5jakarta,13.36
+2singapore,6hongKong,36.95
+2singapore,7taiwan,57.76
+2singapore,9tokyo,77.63
+2singapore,11perth,209.34
+2singapore,42los angeles,242.03
+
+3chennai,0delhi,39.79
+3chennai,2singapore,33.73
+
+4Kuala Lumpur,2singapore,12.17
+
+5jakarta,2singapore,13.36
+5jakarta,42los angeles,186.64
+
+6hongKong,2singapore,36.95
+6hongKong,7taiwan,23.82
+6hongKong,10osaka,59.44
+6hongKong,9tokyo,47.02
+6hongKong,8seoul,60.35
+
+7taiwan,6hongKong,23.82
+7taiwan,10osaka,38.49
+7taiwan,9tokyo,50.52
+7taiwan,42los angeles,128.85
+7taiwan,35seattle,126.45
+
+8seoul,10osaka,39.42
+8seoul,9tokyo,33.52
+8seoul,6hongKong,60.35
+
+9tokyo,10osaka,8.76
+9tokyo,8seoul,33.52
+9tokyo,6hongKong,47.02
+9tokyo,7taiwan,50.52
+9tokyo,2singapore,77.63
+9tokyo,12melbourne,124.12
+9tokyo,35seattle,118.32
+9tokyo,42los angeles,107.10
+
+10osaka,9tokyo,8.76
+10osaka,8seoul,39.42
+10osaka,6hongKong,59.44
+10osaka,7taiwan,38.49
+10osaka,42los angeles,129.42
+
+11perth,2singapore,209.34
+11perth,12melbourne,37.00
+
+12melbourne,11perth,37.00
+12melbourne,9tokyo,124.12
+12melbourne,42los angeles,187.68
+
+13dubai,1mumbai,235.00
+13dubai,15telAviv,165.18
+13dubai,14nairobi,243.07
+13dubai,16cairo,161.15
+
+14nairobi,1mumbai,246.16
+14nairobi,13dubai,243.07
+14nairobi,17johannesburg,60.81
+14nairobi,16cairo,216.17
+
+15telAviv,16cairo,106.36
+15telAviv,13dubai,165.18
+
+16cairo,13dubai,161.15
+16cairo,15telAviv,106.36
+16cairo,1mumbai,165.33
+16cairo,14nairobi,216.17
+16cairo,24milan,45.15
+16cairo,23geneva,51.19
+16cairo,25marseille,37.29
+
+17johannesburg,14nairobi,60.81
+17johannesburg,18lisbon,171.13
+17johannesburg,25marseille,152.82
+
+18lisbon,17johannesburg,171.13
+18lisbon,19madrid,14.81
+
+19madrid,18lisbon,14.81
+19madrid,20paris,17.75
+19madrid,23geneva,26.49
+19madrid,25marseille,16.24
+19madrid,24milan,24.22
+
+20paris,19madrid,17.75
+20paris,21london,8.05
+20paris,22brussels,6.15
+20paris,26frankfurt,10.30
+20paris,24milan,21.74
+20paris,23geneva,21.40
+20paris,25marseille,12.10
+20paris,32new york,78.22
+
+21london,20paris,8.05
+21london,22brussels,11.79
+21london,31dublin,10.89
+21london,32new york,72.95
+21london,33montreal,80.25
+
+22brussels,21london,11.79
+22brussels,20paris,6.15
+22brussels,27berlin,18.38
+22brussels,26frankfurt,7.68
+22brussels,24milan,23.55
+22brussels,23geneva,16.22
+
+23geneva,16cairo,51.19
+23geneva,19madrid,26.49
+23geneva,20paris,21.40
+23geneva,22brussels,16.22
+23geneva,24milan,17.41
+23geneva,25marseille,20.87
+23geneva,26frankfurt,14.10
+23geneva,27berlin,16.89
+
+24milan,16cairo,45.15
+24milan,19madrid,24.22
+24milan,20paris,21.74
+24milan,22brussels,23.55
+24milan,23geneva,17.41
+24milan,27berlin,23.94
+24milan,28warsaw,30.71
+24milan,29moscow,49.68
+24milan,25marseille,10.33
+
+25marseille,16cairo,37.29
+25marseille,17johannesburg,152.82
+25marseille,19madrid,16.24
+25marseille,20paris,12.10
+25marseille,23geneva,20.87
+25marseille,24milan,10.33
+
+26frankfurt,20paris,10.30
+26frankfurt,22brussels,7.68
+26frankfurt,23geneva,14.10
+26frankfurt,27berlin,25.20
+26frankfurt,28warsaw,17.10
+
+27berlin,22brussels,118.38
+27berlin,23geneva,16.89
+27berlin,24milan,23.94
+27berlin,26frankfurt,25.20
+27berlin,28warsaw,25.16
+27berlin,29moscow,52.79
+27berlin,30stockholm,28.99
+27berlin,32new york,90.24
+
+28warsaw,24milan,30.71
+28warsaw,26frankfurt,17.10
+28warsaw,27berlin,25.16
+28warsaw,29moscow,59.47
+28warsaw,30stockholm,41.85
+
+29moscow,24milan,49.68
+29moscow,27berlin,52.79
+29moscow,28warsaw,59.47
+29moscow,30stockholm,59.17
+29moscow,0delhi,197.51
+
+30stockholm,27berlin,28.99
+30stockholm,28warsaw,41.85
+30stockholm,29moscow,59.17
+
+31dublin,21london,10.89
+31dublin,32new york,77.45
+31dublin,33montreal,75.30
+
+32new york,20paris,78.22
+32new york,21london,72.95
+32new york,27berlin,90.24
+32new york,31dublin,77.45
+32new york,33montreal,8.98
+32new york,34des moines,27.34
+32new york,37miami,31.34
+32new york,36dallas,44.30
+
+33montreal,21london,80.25
+33montreal,13dubai,75.30
+33montreal,32new york,8.98
+33montreal,34des moines,34.28
+33montreal,35seattle,65.65
+
+34des moines,32new york,27.34
+34des moines,33montreal,34.28
+34des moines,37miami,39.67
+34des moines,36dallas,21.25
+34des moines,42los angeles,68.26
+34des moines,35seattle,48.46
+
+35seattle,7taiwan,126.45
+35seattle,9tokyo,118.32
+35seattle,33montreal,65.65
+35seattle,34des moines,48.46
+35seattle,42los angeles,48.15
+
+36dallas,32new york,44.30
+36dallas,34des moines,21.25
+36dallas,37miami,32.48
+36dallas,38mexico,25.15
+36dallas,42los angeles,66.42
+
+37miami,32new york,31.34
+37miami,34des moines,39.67
+37miami,36dallas,32.48
+37miami,39caracas,54.36
+37miami,38mexico,54.36
+37miami,40sao paulo,105.45
+
+38mexico,36dallas,25.15
+38mexico,37miami,54.36
+38mexico,40sao paulo,166.65
+38mexico,42los angeles,81.65
+38mexico,39caracas,91.21
+
+39caracas,37miami,54.36
+39caracas,38mexico,91.21
+39caracas,40sao paulo,128.32
+39caracas,42los angeles,128.44
+
+40sao paulo,37miami,105.45
+40sao paulo,38mexico,166.65
+40sao paulo,39caracas,128.32
+40sao paulo,41santiago,47.73
+
+41santiago,40sao paulo,47.73
+41santiago,42los angeles,176.47
+
+42los angeles,2singapore,242.03
+42los angeles,5jakarta,186.64
+42los angeles,7taiwan,128.85
+42los angeles,10osaka,129.42
+42los angeles,9tokyo,107.10
+42los angeles,12melbourne,187.68
+42los angeles,35seattle,48.15
+42los angeles,34des moines,68.26
+42los angeles,36dallas,66.42
+42los angeles,38mexico,81.65
+42los angeles,41santiago,176.47
+42los angeles,39caracas,128.44

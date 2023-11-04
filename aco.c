@@ -130,7 +130,7 @@ void freeACO(ACO *aco)
     free(aco);
 }
 
-void connectCITIES(ACO *aco, int cityi, int cityj)
+void connectCITIES(ACO *aco, int cityi, int cityj, Randoms* randoms)
 {
     aco->GRAPH[cityi][cityj] = 1;
     aco->PHEROMONES[cityi][cityj] = Uniforme(randoms) * aco->TAUMAX;
@@ -208,7 +208,7 @@ double length(ACO *aco, int antk)
     return sum;
 }
 
-int city(ACO *aco)
+int city(ACO *aco, Randoms *randoms)
 {
     double xi = Uniforme(randoms);
     int i = 0;

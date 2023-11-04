@@ -44,7 +44,7 @@ seoul,hongKong,60.35
 
 tokyo,osaka,8.76
 tokyo,seoul,33.52
-tokyo,hongKonge,47.02
+tokyo,hongKong,47.02
 tokyo,taiwan,50.52
 tokyo,singapore,77.63
 tokyo,melbourne,124.12
@@ -53,11 +53,11 @@ tokyo,los angeles,107.10
 
 osaka,tokyo,8.76
 osaka,seoul,39.42
-osaka,hongKonge,59.44
+osaka,hongKong,59.44
 osaka,taiwan,38.49
 osaka,los angeles,129.42
 
-perth,singapo,209.34
+perth,singapore,209.34
 perth,melbourne,37.00
 
 melbourne,perth,37.00
