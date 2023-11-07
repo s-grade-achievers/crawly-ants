@@ -38,8 +38,7 @@ typedef struct
     int *BESTROUTE;
 } ACO;
 
-
-ACO *connectcities(char x[], char y[], ACO *aco, Randoms* randoms)
+ACO *connectcities(char x[], char y[], ACO *aco, Randoms *randoms)
 {
     int a, b;
     if (x[0] == '0')
@@ -62,7 +61,7 @@ ACO *connectcities(char x[], char y[], ACO *aco, Randoms* randoms)
     return aco;
 }
 
-antancs *putdata(antancs *graph, FILE *fp, ACO *aco, Randoms* r)
+antancs *putdata(antancs *graph, FILE *fp, ACO *aco, Randoms *r)
 {
     if (fp == NULL)
     {
@@ -256,7 +255,7 @@ double randomno()
     return random_double;
 }
 
-int city(ACO *aco, Randoms* r)
+int city(ACO *aco, Randoms *r)
 {
     double xi = Uniforme(r);
     int i = 0;
@@ -269,7 +268,7 @@ int city(ACO *aco, Randoms* r)
     return (int)aco->PROBS[i][1];
 }
 
-void route(ACO *aco, int antk, Randoms* r)
+void route(ACO *aco, int antk, Randoms *r)
 {
     aco->ROUTES[antk][0] = aco->INITIALCITY;
     for (int i = 0; i < aco->NUMBEROFCITIES - 1; i++)
@@ -310,6 +309,7 @@ int valid(ACO *aco, int antk, int iteration)
         int cityj = aco->ROUTES[antk][i + 1];
         if (cityi < 0 || cityj < 0)
         {
+            printf("%d %d", cityi, cityj);
             return -1;
         }
         if (!exists(aco, cityi, cityj))
@@ -367,6 +367,7 @@ void optimize(ACO *aco, int ITERATIONS, Randoms *r)
             printf(": ant %d has been released!\n", k);
             while (0 != valid(aco, k, iterations))
             {
+                // printf("%d\n", valid(aco, k, iterations));
                 printf(":: releasing ant %d again!\n", k);
                 for (int i = 0; i < aco->NUMBEROFCITIES; i++)
                 {
@@ -439,7 +440,8 @@ int main()
     // printf("%f %f %f", aco->PHEROMONES[0][3], aco->PHEROMONES[0][1], graph->adjacency_list[0][0].weight);
     int ITERATIONS = 10; // Change this to the desired number of iterations
 
-    // optimize(aco, ITERATIONS, &r);
+    optimize(aco, ITERATIONS, &r);
+
     aco = freeACO(aco);
     return 0;
 }
