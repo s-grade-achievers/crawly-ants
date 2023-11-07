@@ -44,7 +44,7 @@ ACO *connectcities(char x[], char y[], ACO *aco)
         a = (int)x[1] - 48;
     else
         a = atoi(x);
-    if (y[0] == '0')
+    if (y[0] == '0') 
         b = (int)y[1] - 48;
     else
         b = atoi(y);
