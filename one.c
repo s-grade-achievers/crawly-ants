@@ -3,6 +3,7 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
+#include "random.h"
 
 typedef struct NODE
 {
@@ -37,14 +38,14 @@ typedef struct
     int *BESTROUTE;
 } ACO;
 
-ACO *connectcities(char x[], char y[], ACO *aco)
+ACO *connectcities(char x[], char y[], ACO *aco, Randoms *randoms)
 {
     int a, b;
     if (x[0] == '0')
         a = (int)x[1] - 48;
     else
         a = atoi(x);
-    if (y[0] == '0')
+    if (y[0] == '0') 
         b = (int)y[1] - 48;
     else
         b = atoi(y);
@@ -54,11 +55,13 @@ ACO *connectcities(char x[], char y[], ACO *aco)
     {
         aco->GRAPH[a][b] = 1;
         aco->GRAPH[b][a] = 1;
+        aco->PHEROMONES[a][b] = Uniforme(randoms) * aco->TAUMAX;
+        aco->PHEROMONES[b][a] = aco->PHEROMONES[a][b];
     }
     return aco;
 }
 
-antancs *putdata(antancs *graph, FILE *fp, ACO *aco)
+antancs *putdata(antancs *graph, FILE *fp, ACO *aco, Randoms *r)
 {
     if (fp == NULL)
     {
@@ -81,7 +84,7 @@ antancs *putdata(antancs *graph, FILE *fp, ACO *aco)
             dest = strtok(NULL, ",");
             char src1[] = {src[0], src[1], '\0'};
             char dest1[] = {dest[0], dest[1], '\0'};
-            connectcities(src1, dest1, aco);
+            connectcities(src1, dest1, aco, r);
             float w = atof(strtok(NULL, ","));
             strcpy(graph->adjacency_list[i][j].src, src);
             strcpy(graph->adjacency_list[i][j].dst, dest);
@@ -252,9 +255,9 @@ double randomno()
     return random_double;
 }
 
-int city(ACO *aco)
+int city(ACO *aco, Randoms *r)
 {
-    double xi = randomno();
+    double xi = Uniforme(r);
     int i = 0;
     double sum = aco->PROBS[i][0];
     while (sum < xi)
@@ -265,7 +268,7 @@ int city(ACO *aco)
     return (int)aco->PROBS[i][1];
 }
 
-void route(ACO *aco, int antk)
+void route(ACO *aco, int antk, Randoms *r)
 {
     aco->ROUTES[antk][0] = aco->INITIALCITY;
     for (int i = 0; i < aco->NUMBEROFCITIES - 1; i++)
@@ -294,7 +297,7 @@ void route(ACO *aco, int antk)
             return;
         }
 
-        aco->ROUTES[antk][i + 1] = city(aco);
+        aco->ROUTES[antk][i + 1] = city(aco, r);
     }
 }
 
@@ -306,6 +309,7 @@ int valid(ACO *aco, int antk, int iteration)
         int cityj = aco->ROUTES[antk][i + 1];
         if (cityi < 0 || cityj < 0)
         {
+            printf("%d %d", cityi, cityj);
             return -1;
         }
         if (!exists(aco, cityi, cityj))
@@ -352,7 +356,7 @@ void updatePHEROMONES(ACO *aco)
     }
 }
 
-void optimize(ACO *aco, int ITERATIONS)
+void optimize(ACO *aco, int ITERATIONS, Randoms *r)
 {
     for (int iterations = 1; iterations <= ITERATIONS; iterations++)
     {
@@ -363,12 +367,13 @@ void optimize(ACO *aco, int ITERATIONS)
             printf(": ant %d has been released!\n", k);
             while (0 != valid(aco, k, iterations))
             {
+                // printf("%d\n", valid(aco, k, iterations));
                 printf(":: releasing ant %d again!\n", k);
                 for (int i = 0; i < aco->NUMBEROFCITIES; i++)
                 {
                     aco->ROUTES[k][i] = -1;
                 }
-                route(aco, k);
+                route(aco, k, r);
             }
 
             for (int i = 0; i < aco->NUMBEROFCITIES; i++)
@@ -409,12 +414,18 @@ void optimize(ACO *aco, int ITERATIONS)
 
 int main()
 {
-    srand(42);
+    Randoms r;
+    initRandoms(&r, 42);
+
     ACO *aco = (ACO *)malloc(sizeof(ACO));
     aco = initACO(aco, 43, 43, 0.5, 2.0, 1.0, 1.0, 1.0, 3);
     FILE *file = fopen("newer.csv", "r");
     if (file == NULL)
     {
+        typedef struct Randoms
+        {
+            long xpto;
+        } Randoms;
         perror("Error opening the file");
         return 1;
     }
@@ -425,11 +436,12 @@ int main()
     {
         graph->adjacency_list[i] = (node *)malloc(graph->V * sizeof(node));
     }
-    putdata(graph, file, aco);
-    // printf("%s %s %f", graph->adjacency_list[0][0].src, graph->adjacency_list[0][0].dst, graph->adjacency_list[0][0].weight);
+    putdata(graph, file, aco, &r);
+    // printf("%f %f %f", aco->PHEROMONES[0][3], aco->PHEROMONES[0][1], graph->adjacency_list[0][0].weight);
     int ITERATIONS = 10; // Change this to the desired number of iterations
 
-    optimize(aco, ITERATIONS);
+    optimize(aco, ITERATIONS, &r);
+
     aco = freeACO(aco);
     return 0;
 }
