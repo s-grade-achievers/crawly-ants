@@ -4,6 +4,10 @@
 #include <limits.h>
 #include <math.h>
 
+#define MAX_ROUTERS 8
+#define DEFAULT_SERVICE_RATE 320
+#define ROUTER_RANGE 5
+
 typedef struct NODE
 {
     char src[30];
@@ -407,29 +411,78 @@ void optimize(ACO *aco, int ITERATIONS)
     }
 }
 
+typedef struct nodeR
+{
+    int ID;
+    int servRate;
+    int inpRate;
+    int posX;
+    int posY;
+    int TR;
+    double enrg;
+    double depth;
+    double ratio;
+    int neighSet[MAX_ROUTERS];
+} nodeR;
+
+nodeR routers[MAX_ROUTERS];
+int visited[MAX_ROUTERS];
+
+void findNeighbors(int nR)
+{
+    int i = 0;
+    for (; i < nR; i++)
+    {
+        int j = i + 1;
+        for (; j < nR; j++)
+        {
+            double dist = sqrt(pow((routers[i].posX - routers[j].posX), 2.0) + pow((routers[i].posY - routers[j].posY), 2.0));
+            if (dist <= routers[i].TR)
+            {
+                routers[i].neighSet[j] = 1;
+                routers[j].neighSet[i] = 1;
+            }
+        }
+    }
+}
+
 int main()
 {
-    srand(42);
-    ACO *aco = (ACO *)malloc(sizeof(ACO));
-    aco = initACO(aco, 43, 43, 0.5, 2.0, 1.0, 1.0, 1.0, 3);
-    FILE *file = fopen("newer.csv", "r");
-    if (file == NULL)
-    {
-        perror("Error opening the file");
-        return 1;
-    }
-    antancs *graph = (antancs *)malloc(sizeof(antancs));
-    graph->V = 50;
-    graph->adjacency_list = (node **)malloc(graph->V * sizeof(node *));
-    for (int i = 0; i < graph->V; i++)
-    {
-        graph->adjacency_list[i] = (node *)malloc(graph->V * sizeof(node));
-    }
-    putdata(graph, file, aco);
-    // printf("%s %s %f", graph->adjacency_list[0][0].src, graph->adjacency_list[0][0].dst, graph->adjacency_list[0][0].weight);
-    int ITERATIONS = 10; // Change this to the desired number of iterations
+    int noRtrs = MAX_ROUTERS;
+    printf("No of Nodes: %d\n", noRtrs);
 
-    optimize(aco, ITERATIONS);
-    aco = freeACO(aco);
-    return 0;
+    int i;
+
+    for (i = 1; i < noRtrs; i++)
+    {
+        int tempIR, tempX, tempY;
+        double tempD, tempE;
+        tempIR = rand() % 212 + 32;
+        tempX = rand() % 6 + 1;
+        tempY = rand() % 6 + 1;
+        tempE = rand() % 100 + 1;
+        tempD = rand() % 10 + 1;
+        nodeR temp = {i, tempIR, tempX, tempY, DEFAULT_SERVICE_RATE, ROUTER_RANGE, tempE, tempD, tempE / tempD};
+        routers[i] = temp;
+    }
+
+    int srcID = 0;
+    printf("\n Source Node: %d", srcID);
+
+    int destID = 6;
+    printf("\n Destination Node: %d\n", destID);
+
+    findNeighbors(noRtrs);
+
+    for (int i = 0; i < noRtrs; i++)
+    {
+        printf("\n Neighbour Of %d: ", i);
+        for (int j = 0; j < noRtrs; j++)
+        {
+            if (routers[i].neighSet[j] == 1)
+            {
+                printf(" %d", j);
+            }
+        }
+    }
 }
