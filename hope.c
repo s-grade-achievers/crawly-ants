@@ -5,8 +5,8 @@
 #include <math.h>
 #include <string.h>
 
-#define MAX_CITIES 43
-#define MAX_ANTS 43
+#define MAX_CITIES 50
+#define MAX_ANTS 50
 #define ALPHA 1.0
 #define BETA 5.0
 #define RHO 0.5
@@ -56,25 +56,26 @@ void init_pheromone()
 
 void init_ant(int k)
 {
-    ant[k][0] = 10;
+    ant[k][0] = rand() % num_cities;
     for (int i = 1; i < num_cities; i++)
     {
-        int j;
+        int from = ant[k][i - 1];
         double denom = 0.0;
-        for (j = 0; j < num_cities; j++)
+        for (int j = 0; j < num_cities; j++)
         {
             if (!ant[k][j])
             {
-                denom += pow(pheromone[ant[k][j - 1]][j], ALPHA) * pow(1.0 / distance[ant[k][j - 1]][j], BETA);
+                denom += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
             }
         }
-        for (j = 0; j < num_cities; j++)
+        double roulette = rand_double() * denom;
+        double prob = 0.0;
+        for (int j = 0; j < num_cities; j++)
         {
             if (!ant[k][j])
             {
-                double numerator = pow(pheromone[ant[k][j - 1]][j], ALPHA) * pow(1.0 / distance[ant[k][j - 1]][j], BETA);
-                double prob = numerator / denom;
-                if (rand_double() < prob)
+                prob += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
+                if (prob >= roulette)
                 {
                     ant[k][i] = j;
                     break;
@@ -144,18 +145,14 @@ antancs *putdata(antancs *graph, FILE *fp)
     fgets(line, sizeof(line), fp);
 
     int i = 0, j = 0;
-    char *token = malloc(30 * sizeof(char));
     while (fgets(line, sizeof(line), fp) != NULL)
     {
         if (line[0] != '\n')
         {
-            char *src = (char *)malloc(30 * sizeof(char));
-            char *dest = (char *)malloc(30 * sizeof(char));
-            src = strtok(line, ",");
-            dest = strtok(NULL, ",");
+            char *src = strtok(line, ",");
+            char *dest = strtok(NULL, ",");
             char src1[] = {src[0], src[1], '\0'};
             char dest1[] = {dest[0], dest[1], '\0'};
-            // connectcities(src1, dest1, aco, r);
             float w = atof(strtok(NULL, ","));
             strcpy(graph->adjacency_list[i][j].src, src);
             strcpy(graph->adjacency_list[i][j].dst, dest);
@@ -176,8 +173,6 @@ int main()
     srand(time(NULL));
     num_cities = 43; // Change this to the number of cities in your problem
     num_ants = 43;   // Change this to the number of ants in your problem
-    // Initialize distance matrix with your problem data
-    // Initialize pheromone matrix
 
     FILE *file = fopen("newer.csv", "r");
     if (file == NULL)
@@ -186,19 +181,17 @@ int main()
         return 1;
     }
     antancs *graph = (antancs *)malloc(sizeof(antancs));
-    graph->V = 50;
+    graph->V = num_cities;
     graph->adjacency_list = (node **)malloc(graph->V * sizeof(node *));
     for (int i = 0; i < graph->V; i++)
     {
         graph->adjacency_list[i] = (node *)malloc(graph->V * sizeof(node));
     }
     putdata(graph, file);
-    // printf("%s %s %f", graph->adjacency_list[0][0].src, graph->adjacency_list[0][0].dst, graph->adjacency_list[0][0].weight);
     for (int i = 0; i < graph->V; i++)
     {
         for (int j = 0; j < graph->V; j++)
         {
-            // Assuming the distance between cities i and j is stored in the weight field of graph->adjacency_list[i][j]
             distance[i][j] = graph->adjacency_list[i][j].weight;
         }
     }
