@@ -49,18 +49,15 @@ ACO *connectcities(char x[], char y[], ACO *aco, Randoms *randoms)
         a = (int)x[1] - 48;
     else
         a = atoi(x);
-    if (y[0] == '0') 
+    if (y[0] == '0')
         b = (int)y[1] - 48;
     else
         b = atoi(y);
-    // printf("%s %s %d %d\n", x, y, a, b);
 
     if (aco->GRAPH[a][b] != 1)
     {
         aco->GRAPH[a][b] = 1;
         aco->GRAPH[b][a] = 1;
-        aco->PHEROMONES[a][b] = Uniforme(randoms) * aco->TAUMAX;
-        aco->PHEROMONES[b][a] = aco->PHEROMONES[a][b];
     }
     return aco;
 }
@@ -313,7 +310,7 @@ int valid(ACO *aco, int antk, int iteration)
         int cityj = aco->ROUTES[antk][i + 1];
         if (cityi < 0 || cityj < 0)
         {
-            printf("%d %d", cityi, cityj);
+            // printf("%d %d", cityi, cityj);
             return -1;
         }
         if (!exists(aco, cityi, cityj))
@@ -369,16 +366,16 @@ void optimize(ACO *aco, int ITERATIONS, Randoms *r)
         for (int k = 0; k < aco->NUMBEROFANTS; k++)
         {
             printf(": ant %d has been released!\n", k);
-            while (0 != valid(aco, k, iterations))
-            {
-                // printf("%d\n", valid(aco, k, iterations));
-                printf(":: releasing ant %d again!\n", k);
-                for (int i = 0; i < aco->NUMBEROFCITIES; i++)
-                {
-                    aco->ROUTES[k][i] = -1;
-                }
-                route(aco, k, r);
-            }
+            // while (0 != valid(aco, k, iterations))
+            // {
+            //     // printf("%d\n", valid(aco, k, iterations));
+            //     printf(":: releasing ant %d again!\n", k);
+            //     for (int i = 0; i < aco->NUMBEROFCITIES; i++)
+            //     {
+            //         aco->ROUTES[k][i] = -1;
+            //     }
+            //     route(aco, k, r);
+            // }
 
             for (int i = 0; i < aco->NUMBEROFCITIES; i++)
             {
