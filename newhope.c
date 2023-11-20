@@ -48,12 +48,12 @@ antancs *putdata(antancs *graph, FILE *fp)
         {
             char *src = strtok(line, ",");
             char *dest = strtok(NULL, ",");
-            char src1[] = {src[0], src[1], '\0'};
-            char dest1[] = {dest[0], dest[1], '\0'};
+            int result1 = (src[0] - '0') * 10 + (src[1] - '0');
+            int result = (dest[0] - '0') * 10 + (dest[1] - '0');
             float w = atof(strtok(NULL, ","));
-            strcpy(graph->adjacency_list[i][j].src, src);
-            strcpy(graph->adjacency_list[i][j].dst, dest);
-            graph->adjacency_list[i][j].weight = w;
+            strcpy(graph->adjacency_list[result1][result].src, src);
+            strcpy(graph->adjacency_list[result1][result].dst, dest);
+            graph->adjacency_list[i][result].weight = w;
             j++;
         }
         else
@@ -79,7 +79,6 @@ void initialize_pheromone()
 
 void generate_ants(int start_point, int end_point)
 {
-    // Generate a population of artificial ants
     for (int i = 0; i < MAX_ANTS; i++)
     {
         ants[i][0] = start_point;
@@ -94,7 +93,7 @@ void generate_ants(int start_point, int end_point)
                 {
                     probabilities[k] = 0.0;
                 }
-                else
+                else if(distance[current_city][k] > 0)
                 {
                     double pheromone_level = pheromone[current_city][k];
                     double distance_to_city = distance[current_city][k];
@@ -302,6 +301,7 @@ int main()
             distance[i][j] = graph->adjacency_list[i][j].weight;
         }
     }
+
     initialize_pheromone();
     for (int i = 0; i < 100; i++)
     {
@@ -311,5 +311,11 @@ int main()
         ant_tour();
     }
     print_best_solution();
+    // for (int i = 0; i < MAX_CITIES; i++)
+    // {
+    //     for(int j = 0; j < MAX_ANTS; j++)
+    //         printf("%d ", ants[i][j]);
+    //     printf("\n");
+    // }
     return 0;
 }

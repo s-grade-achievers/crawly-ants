@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define MAX_CITIES 43
-#define MAX_ANTS 43
+#define MAX_ANTS 500
 #define ALPHA 1.0
 #define BETA 2.0
 #define RHO 0.5
