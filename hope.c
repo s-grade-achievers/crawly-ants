@@ -22,6 +22,8 @@ double best_length = INT_MAX;
 
 int num_cities;
 int num_ants;
+int start_point = 0; // Define the starting point
+int end_point = 10;  // Define the ending point
 int ant[MAX_ANTS][MAX_CITIES];
 double length[MAX_ANTS];
 
@@ -37,101 +39,6 @@ typedef struct ANTANCS
     int V;
     node **adjacency_list;
 } antancs;
-
-double rand_double()
-{
-    return (double)rand() / RAND_MAX;
-}
-
-void init_pheromone()
-{
-    for (int i = 0; i < num_cities; i++)
-    {
-        for (int j = 0; j < num_cities; j++)
-        {
-            pheromone[i][j] = INIT_PHEROMONE;
-        }
-    }
-}
-
-void init_ant(int k)
-{
-    ant[k][0] = rand() % num_cities;
-    for (int i = 1; i < num_cities; i++)
-    {
-        int from = ant[k][i - 1];
-        double denom = 0.0;
-        for (int j = 0; j < num_cities; j++)
-        {
-            if (!ant[k][j])
-            {
-                denom += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
-            }
-        }
-        double roulette = rand_double() * denom;
-        double prob = 0.0;
-        for (int j = 0; j < num_cities; j++)
-        {
-            if (!ant[k][j])
-            {
-                prob += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
-                if (prob >= roulette)
-                {
-                    ant[k][i] = j;
-                    break;
-                }
-            }
-        }
-    }
-}
-
-void update_pheromone()
-{
-    for (int i = 0; i < num_ants; i++)
-    {
-        for (int j = 0; j < num_cities - 1; j++)
-        {
-            int from = ant[i][j];
-            int to = ant[i][j + 1];
-            pheromone[from][to] = pheromone[from][to] * (1.0 - RHO) + (QVAL / length[i]) * RHO;
-            pheromone[to][from] = pheromone[from][to];
-        }
-    }
-}
-
-void ant_tour()
-{
-    for (int i = 0; i < num_ants; i++)
-    {
-        init_ant(i);
-        length[i] = 0.0;
-        for (int j = 0; j < num_cities - 1; j++)
-        {
-            int from = ant[i][j];
-            int to = ant[i][j + 1];
-            length[i] += distance[from][to];
-        }
-        length[i] += distance[ant[i][num_cities - 1]][ant[i][0]];
-        if (length[i] < best_length)
-        {
-            best_length = length[i];
-            for (int j = 0; j < num_cities; j++)
-            {
-                best_path[j] = ant[i][j];
-            }
-        }
-    }
-}
-
-void print_path()
-{
-    printf("Best path: ");
-    for (int i = 0; i < num_cities; i++)
-    {
-        printf("%d ", (int)best_path[i]);
-    }
-    printf("\nBest length: %f\n", best_length);
-}
 
 antancs *putdata(antancs *graph, FILE *fp)
 {
@@ -167,12 +74,114 @@ antancs *putdata(antancs *graph, FILE *fp)
     }
     return graph;
 }
+double rand_double()
+{
+    return (double)rand() / RAND_MAX;
+}
+
+void init_pheromone()
+{
+    for (int i = 0; i < num_cities; i++)
+    {
+        for (int j = 0; j < num_cities; j++)
+        {
+            pheromone[i][j] = INIT_PHEROMONE;
+        }
+    }
+}
+void init_ant(int k, int start_point, int end_point)
+{
+    ant[k][0] = start_point; // Set the starting point for each ant
+    for (int i = 1; i < num_cities; i++)
+    {
+        int from = ant[k][i - 1];
+        double denom = 0.0;
+        for (int j = 0; j < num_cities; j++)
+        {
+            if (j != end_point && !ant[k][j]) // Exclude the end point from consideration
+            {
+                denom += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
+            }
+        }
+        double roulette = rand_double() * denom;
+        double prob = 0.0;
+        for (int j = 0; j < num_cities; j++)
+        {
+            if (j != end_point && !ant[k][j]) // Exclude the end point from consideration
+            {
+                prob += pow(pheromone[from][j], ALPHA) * pow(1.0 / distance[from][j], BETA);
+                if (prob >= roulette)
+                {
+                    ant[k][i] = j;
+                    break;
+                }
+            }
+        }
+    }
+    ant[k][num_cities - 1] = end_point; // Set the ending point for each ant
+}
+
+void ant_tour()
+{
+    for (int i = 0; i < num_ants; i++)
+    {
+        ant[i][0] = start_point; // Set the starting point for each ant
+        init_ant(i, start_point, end_point);
+        length[i] = 0.0;
+        for (int j = 0; j < num_cities - 1; j++)
+        {
+            int from = ant[i][j];
+            int to = ant[i][j + 1];
+            length[i] += distance[from][to];
+        }
+        length[i] += distance[ant[i][num_cities - 1]][end_point]; // Add the distance to the ending point
+        if (length[i] < best_length)
+        {
+            best_length = length[i];
+            for (int j = 0; j < num_cities; j++)
+            {
+                best_path[j] = ant[i][j];
+            }
+        }
+    }
+}
+
+void update_pheromone()
+{
+    for (int i = 0; i < num_ants; i++)
+    {
+        for (int j = 0; j < num_cities - 1; j++)
+        {
+            int from = ant[i][j];
+            int to = ant[i][j + 1];
+            if ((from == start_point && to == end_point) || (from == end_point && to == start_point))
+            {
+                pheromone[from][to] = pheromone[from][to] * (1.0 - RHO) + (QVAL / length[i]) * RHO;
+                pheromone[to][from] = pheromone[from][to];
+            }
+        }
+    }
+}
+
+void print_path()
+{
+    printf("Best path: ");
+    for (int i = 0; i < num_cities; i++)
+    {
+        printf("%d ", (int)best_path[i]);
+    }
+    printf("\nBest length: %f\n", best_length);
+}
+
+
 
 int main()
 {
     srand(time(NULL));
-    num_cities = 43; // Change this to the number of cities in your problem
-    num_ants = 43;   // Change this to the number of ants in your problem
+    num_cities = 43;
+    num_ants = 43;
+    int start_point = 0; // Define the starting point
+    int end_point = 10;  // Define the ending point
 
     FILE *file = fopen("newer.csv", "r");
     if (file == NULL)
@@ -199,8 +208,8 @@ int main()
     init_pheromone();
     for (int i = 0; i < MAX_TOURS; i++)
     {
-        ant_tour();
-        update_pheromone();
+        ant_tour(start_point, end_point);
+        update_pheromone(start_point, end_point);
     }
     print_path();
     return 0;
