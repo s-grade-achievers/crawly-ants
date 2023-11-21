@@ -41,7 +41,7 @@ void printPath(int parent[], int j)
 void printSolution(float dist[], int parent[], int src, int V, int dest)
 {
     printf("Vertex   Distance from Source   Path\n");
-    printf("%d \t\t %.2f \t\t\t %d ", src, dist[dest], src);
+    printf("%d \t\t %.2f \t %d ", src, dist[dest], src);
     printPath(parent, dest);
     printf("\n");
 }
@@ -51,13 +51,21 @@ void dijkstra(antancs *graph, int src, int dest)
     int V = graph->V;
     float dist[V];
     int parent[V];
+    char **cities = (char **)malloc(V * sizeof(char *)); // Allocate memory for cities array
+
+    for (int i = 0; i < V; i++)
+    {
+        dist[i] = INT_MAX;
+        parent[i] = -1;
+        cities[i] = (char *)malloc(30 * sizeof(char)); // Allocate memory for each city name
+    }
+
     int sptSet[V];
 
     for (int i = 0; i < V; i++)
-        dist[i] = INT_MAX, sptSet[i] = 0;
+        sptSet[i] = 0;
 
     dist[src] = 0;
-    parent[src] = -1;
 
     for (int count = 0; count < V - 1; count++)
     {
@@ -70,11 +78,20 @@ void dijkstra(antancs *graph, int src, int dest)
             {
                 dist[v] = dist[u] + graph->adjacency_list[u][v].weight;
                 parent[v] = u;
+                strcpy(cities[v], graph->adjacency_list[u][v].src); // Store the city name
             }
         }
     }
 
+    for (int i = 0; i < V; i++)
+        printf("%s  ", cities[V]);
+    printf("\n");
     printSolution(dist, parent, src, V, dest);
+
+
+    for (int i = 0; i < V; i++)
+        free(cities[i]); // Free memory for each city name
+    free(cities);        // Free memory for cities array
 }
 
 antancs *putdata(antancs *graph, FILE *fp)
