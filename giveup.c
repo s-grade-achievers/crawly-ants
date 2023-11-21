@@ -16,6 +16,7 @@ typedef struct ANTANCS
     node **adjacency_list;
 } antancs;
 
+char **cities;
 int minDistance(float dist[], int sptSet[], int V)
 {
     float min = INT_MAX;
@@ -51,13 +52,11 @@ void dijkstra(antancs *graph, int src, int dest)
     int V = graph->V;
     float dist[V];
     int parent[V];
-    char **cities = (char **)malloc(V * sizeof(char *)); // Allocate memory for cities array
 
     for (int i = 0; i < V; i++)
     {
         dist[i] = INT_MAX;
         parent[i] = -1;
-        cities[i] = (char *)malloc(30 * sizeof(char)); // Allocate memory for each city name
     }
 
     int sptSet[V];
@@ -78,20 +77,12 @@ void dijkstra(antancs *graph, int src, int dest)
             {
                 dist[v] = dist[u] + graph->adjacency_list[u][v].weight;
                 parent[v] = u;
-                strcpy(cities[v], graph->adjacency_list[u][v].src); // Store the city name
             }
         }
     }
 
-    for (int i = 0; i < V; i++)
-        printf("%s  ", cities[V]);
-    printf("\n");
+    
     printSolution(dist, parent, src, V, dest);
-
-
-    for (int i = 0; i < V; i++)
-        free(cities[i]); // Free memory for each city name
-    free(cities);        // Free memory for cities array
 }
 
 antancs *putdata(antancs *graph, FILE *fp)
@@ -141,7 +132,7 @@ int main()
     graph = putdata(graph, fp);
 
     FILE *f = fopen("cities.txt", "r");
-    char **cities = (char **)malloc(sizeof(char *) * 43);
+    cities = (char **)malloc(sizeof(char *) * 43);
     for (int i = 0; i < 43; i++)
         cities[i] = (char *)malloc(sizeof(char));
     char line[40];
