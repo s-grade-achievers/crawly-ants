@@ -1,6 +1,7 @@
-// Pseudocode for Ant Colony Optimization (ACO) in C
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 typedef struct
 {
@@ -83,6 +84,51 @@ Ant *createAnts(int numAnts, int numNodes)
     return ants;
 }
 
+int selectNextNode(Ant *ant, Graph *graph, double alpha, double beta)
+{
+    int currentNode = ant->currentNode;
+    int numNodes = graph->numNodes;
+    double *probabilities = (double *)malloc(sizeof(double) * numNodes);
+    double sum = 0.0;
+
+    // Calculate the probabilities of choosing each node as the next node
+    for (int i = 0; i < numNodes; i++)
+    {
+        if (i != currentNode)
+        {
+            // Calculate the probability using pheromone and heuristic information
+            double pheromone = graph->pheromone[currentNode][i];
+            double heuristic = 1.0 / graph->distance[currentNode][i]; // Example heuristic (you can use a different heuristic)
+            probabilities[i] = pow(pheromone, alpha) * pow(heuristic, beta);
+            sum += probabilities[i];
+        }
+        else
+        {
+            probabilities[i] = 0.0; // Probability of selecting the current node is set to 0
+        }
+    }
+
+    // Normalize probabilities
+    for (int i = 0; i < numNodes; i++)
+    {
+        probabilities[i] /= sum;
+    }
+
+    // Choose the next node based on probabilities
+    double randValue = (double)rand() / RAND_MAX; // Generate a random value between 0 and 1
+    double cumulativeProb = 0.0;
+    int nextNode = 0;
+
+    while (nextNode < numNodes - 1 && randValue > cumulativeProb + probabilities[nextNode])
+    {
+        cumulativeProb += probabilities[nextNode];
+        nextNode++;
+    }
+
+    free(probabilities);
+    return nextNode;
+}
+
 // Define the ACO algorithm functions
 void initializePheromoneLevels(Graph *graph, double initialPheromoneLevel)
 {
@@ -108,7 +154,7 @@ void updatePheromoneLevels(Graph *graph, Ant *ants, double evaporationRate, doub
         }
     }
 
-    for (int k = 0; k < numAnts; k++)
+    for (int k = 0; k < graph->numNodes; k++)
     {
         double antPheromoneDeposit = pheromoneDeposit / ants[k].tourLength; // Adjust pheromone deposit based on ant's tour length
         for (int i = 0; i < graph->numNodes - 1; i++)
@@ -164,7 +210,7 @@ void moveAntToConstructSolution(Ant *ant, Graph *graph, double alpha, double bet
     ant->tourLength += graph->distance[ant->tour[graph->numNodes - 1]][ant->tour[0]];
 }
 
-void antColonyOptimization(Graph *graph, int numAnts, int numIterations, double evaporationRate, double alpha, double beta)
+void antColonyOptimization(Graph *graph, int numAnts, int numIterations, double evaporationRate, double alpha, double beta, int initialPheromoneLevel)
 {
     // Initialize pheromone levels
     initializePheromoneLevels(graph, initialPheromoneLevel);
@@ -172,7 +218,7 @@ void antColonyOptimization(Graph *graph, int numAnts, int numIterations, double 
     for (int iter = 0; iter < numIterations; iter++)
     {
         // Create ants
-        Ant *ants = createAnts(numAnts);
+        Ant *ants = createAnts(numAnts, numAnts);
 
         // Move ants and update pheromone levels
         for (int k = 0; k < numAnts; k++)
@@ -180,14 +226,13 @@ void antColonyOptimization(Graph *graph, int numAnts, int numIterations, double 
             // Move ant k to construct a solution
             moveAntToConstructSolution(&ants[k], graph, alpha, beta);
             // Update pheromone levels based on ant k's tour
+            double pheromoneDeposit = graph->pheromone[k][k];
             updatePheromoneLevels(graph, &ants[k], evaporationRate, pheromoneDeposit);
         }
 
         // Update global best solution if necessary
         updateGlobalBestSolution(graph, ants, numAnts);
 
-        // Release memory for ants
-        releaseAnts(ants);
     }
 }
 
@@ -219,11 +264,16 @@ int main()
     // Close the file
     fclose(fp);
 
-    Graph *graph1 = (Graph*)malloc(sizeof(Graph));
+    Graph *graph1 = (Graph *)malloc(sizeof(Graph));
     graph1->numNodes = 43;
-    graph1->distance = (double**)malloc(sizeof(double) * graph1->numNodes * graph1->numNodes);
-    graph1->pheromone = (double**)malloc(sizeof(double) * graph1->numNodes * graph1->numNodes);
-    graph1->globalBestTour = (int*)malloc(sizeof(int) * graph1->numNodes);
+    graph1->distance = (double **)malloc(sizeof(double *) * graph1->numNodes);
+    graph1->pheromone = (double **)malloc(sizeof(double *) * graph1->numNodes);
+    for (int i = 0; i < graph1->numNodes; i++)
+    {
+        graph1->distance[i] = (double *)malloc(sizeof(double) * graph1->numNodes);
+        graph1->pheromone[i] = (double *)malloc(sizeof(double) * graph1->numNodes);
+    }
+    graph1->globalBestTour = (int *)malloc(sizeof(int) * graph1->numNodes);
     graph1->globalBestLength = 10000000000.0;
     for (int i = 0; i < graph->V; i++)
     {
@@ -235,9 +285,9 @@ int main()
     double initialPheromoneLevel = 0.1;
     initializePheromoneLevels(graph1, initialPheromoneLevel);
     // Create the ants
-    Ant *ants = createAnts(numAnts);
+    Ant *ants = createAnts(graph1->numNodes, graph1->numNodes);
     // Start ACO with 100 iterations
     int numIterations = 100;
-    antColonyOptimization(graph1, numAnts, numIterations, 0.5, 1.0, 2.0);
+    antColonyOptimization(graph1, graph1->numNodes, numIterations, 0.5, 1.0, 2.0, initialPheromoneLevel);
     return 0;
 }
