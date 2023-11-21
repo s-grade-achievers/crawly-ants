@@ -17,6 +17,8 @@ typedef struct ANTANCS
 } antancs;
 
 char **cities;
+char **path;
+
 int minDistance(float dist[], int sptSet[], int V)
 {
     float min = INT_MAX;
@@ -29,21 +31,21 @@ int minDistance(float dist[], int sptSet[], int V)
     return min_index;
 }
 
-void printPath(int parent[], int j)
+void printPath(int parent[], int j, int i)
 {
     if (parent[j] == -1)
         return;
 
-    printPath(parent, parent[j]);
-
-    printf("%d ", j);
+    printPath(parent, parent[j], i + 1);
+    path[i] = cities[j];
+    printf("%s ", cities[j]);
 }
 
 void printSolution(float dist[], int parent[], int src, int V, int dest)
 {
-    printf("Vertex   Distance from Source   Path\n");
-    printf("%d \t\t %.2f \t %d ", src, dist[dest], src);
-    printPath(parent, dest);
+    printf("Distance from Source: ");
+    printf("%.2f \nPath: %s ", dist[dest], cities[src]);
+    printPath(parent, dest, 0);
     printf("\n");
 }
 
@@ -81,7 +83,6 @@ void dijkstra(antancs *graph, int src, int dest)
         }
     }
 
-    
     printSolution(dist, parent, src, V, dest);
 }
 
@@ -133,8 +134,12 @@ int main()
 
     FILE *f = fopen("cities.txt", "r");
     cities = (char **)malloc(sizeof(char *) * 43);
+    path = (char **)malloc(sizeof(char *) * 43);
     for (int i = 0; i < 43; i++)
+    {
         cities[i] = (char *)malloc(sizeof(char));
+        path[i] = (char *)malloc(sizeof(char));
+    }
     char line[40];
     int i = 0;
     while (fgets(line, sizeof(line), f))
@@ -145,10 +150,16 @@ int main()
     }
 
     int src = 0, dest = 0;
-    printf("Enter the source and destination vertices: ");
+    printf("Enter the source and destination cities from the given list\n0. delhi\n1. mumbai\n2. singapore\n3. chennai\n4. Kuala Lumpur\n5. jakarta\n6. hongKong\n7. taiwan\n8. seoul\n9. tokyo\n10. osaka\n11. perth\n12. melbourne\n13. dubai\n14. nairobi\n15. telAviv\n16. cairo\n17. johannesburg\n18. lisbon\n19. madrid\n20. paris\n21. london\n22. brussels\n23. geneva\n24. milan\n25. marseille\n26. frankfurt\n27. berlin\n28. warsaw\n29. moscow\n30. stockholm\n31. dublin\n32. new york\n33. montreal\n34. des moines\n35. seattle\n36. dallas\n37. miami\n38. mexico\n39. caracas\n40. sao paulo\n41. santiago\n42. los angeles\n");
     scanf("%d %d", &src, &dest);
 
     dijkstra(graph, src, dest);
+    // for (int i = 0; i < 43; i++)
+    // {
+    //         printf("%s ", path[i]);
+    // }
+    // printf("%s", cities[src]);
+    // printf("\n");
 
     return 0;
 }
