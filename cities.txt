@@ -1,0 +1,43 @@
+delhi
+mumbai
+singapore
+chennai
+Kuala Lumpur
+jakarta
+hongKong
+taiwan
+seoul
+tokyo
+osaka
+perth
+melbourne
+dubai
+nairobi
+telAviv
+cairo
+johannesburg
+lisbon
+madrid
+paris
+london
+brussels
+geneva
+milan
+marseille
+frankfurt
+berlin
+warsaw
+moscow
+stockholm
+dublin
+new york
+montreal
+des moines
+seattle
+dallas
+miami
+mexico
+caracas
+sao paulo
+santiago
+los angeles
