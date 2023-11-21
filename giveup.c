@@ -140,6 +140,19 @@ int main()
 
     graph = putdata(graph, fp);
 
+    FILE *f = fopen("cities.txt", "r");
+    char **cities = (char **)malloc(sizeof(char *) * 43);
+    for (int i = 0; i < 43; i++)
+        cities[i] = (char *)malloc(sizeof(char));
+    char line[40];
+    int i = 0;
+    while (fgets(line, sizeof(line), f))
+    {
+        char *src = strtok(line, "\n");
+        strcpy(cities[i], src);
+        i++;
+    }
+
     int src = 0, dest = 0;
     printf("Enter the source and destination vertices: ");
     scanf("%d %d", &src, &dest);
