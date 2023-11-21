@@ -96,5 +96,3 @@ float sorte(Randoms *r, int m)
 {
     return (1.0 * rand()) / (1.0 * RAND_MAX) * 2.0 * m - m;
 }
-
-
