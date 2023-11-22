@@ -13,7 +13,7 @@
 02singapore,01mumbai,64.96
 02singapore,04Kuala Lumpur,12.17
 02singapore,05jakarta,13.36
-02singapore,06Hong Kong,36.95
+02singapore,06hongKong,36.95
 02singapore,07taiwan,57.76
 02singapore,09tokyo,77.63
 02singapore,11perth,209.34
@@ -27,13 +27,13 @@
 05jakarta,02singapore,13.36
 05jakarta,42los angeles,186.64
 
-06Hong Kong,02singapore,36.95
-06Hong Kong,07taiwan,23.82
-06Hong Kong,10osaka,59.44
-06Hong Kong,09tokyo,47.02
-06Hong Kong,08seoul,60.35
+06hongKong,02singapore,36.95
+06hongKong,07taiwan,23.82
+06hongKong,10osaka,59.44
+06hongKong,09tokyo,47.02
+06hongKong,08seoul,60.35
 
-07taiwan,06Hong Kong,23.82
+07taiwan,06hongKong,23.82
 07taiwan,10osaka,38.49
 07taiwan,09tokyo,50.52
 07taiwan,42los angeles,128.85
@@ -41,11 +41,11 @@
 
 08seoul,10osaka,39.42
 08seoul,09tokyo,33.52
-08seoul,06Hong Kong,60.35
+08seoul,06hongKong,60.35
 
 09tokyo,10osaka,8.76
 09tokyo,08seoul,33.52
-09tokyo,06Hong Kong,47.02
+09tokyo,06hongKong,47.02
 09tokyo,07taiwan,50.52
 09tokyo,02singapore,77.63
 09tokyo,12melbourne,124.12
@@ -54,7 +54,7 @@
 
 10osaka,09tokyo,8.76
 10osaka,08seoul,39.42
-10osaka,06Hong Kong,59.44
+10osaka,06hongKong,59.44
 10osaka,07taiwan,38.49
 10osaka,42los angeles,129.42
 
