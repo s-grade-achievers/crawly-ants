@@ -1,1 +1,2 @@
-dallas new york berlin stockholm 
+jakarta,singapore,chennai,delhi
+284.390015

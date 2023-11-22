@@ -39,15 +39,16 @@ void printPath(int parent[], int j, int i, FILE *fp)
     printPath(parent, parent[j], i + 1, fp);
     path[i] = cities[j];
     printf("%s ", cities[j]);
-    fprintf(fp, "%s ", cities[j]);
+    fprintf(fp, "%s,", cities[j]);
 }
 
 void printSolution(float dist[], int parent[], int src, int V, int dest, FILE *fp)
 {
     printf("Distance from Source: ");
     printf("%.2f \nPath: %s ", dist[dest], cities[src]);
-    fprintf(fp, "%s ", cities[src]);
+    fprintf(fp, "%s,", cities[src]);
     printPath(parent, dest, 0, fp);
+    fprintf(fp, "\n%f", dist[dest]);
     printf("\n");
 }
 

@@ -30,11 +30,11 @@ class WorldMapApp:
         self.city_info_label = ttk.Label(root, text="")
         self.city_info_label.pack()
 
-        self.city_entry_label = ttk.Label(root, text="Enter 4 city names (comma-separated):")
-        self.city_entry_label.pack()
+        #self.city_entry_label = ttk.Label(root, text="Enter 4 city names (comma-separated):")
+        #self.city_entry_label.pack()
 
-        self.city_entry = ttk.Entry(root)
-        self.city_entry.pack()
+        #self.city_entry = ttk.Entry(root)
+        #self.city_entry.pack()
 
     def load_map_image(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")])
@@ -71,7 +71,7 @@ class WorldMapApp:
             'los angeles': (34.0522, -118.2437),
             'milan': (45.4642, 9.1900),
             'lisbon': (38.7223, -9.1393),
-            'hongKong': (22.3193, 114.1694),
+            'Hong Kong': (22.3193, 114.1694),
             'moscow': (55.7558, 37.6176),
             'mumbai': (19.0760, 72.8777),
             'delhi': (28.6139, 77.2090),
@@ -105,24 +105,27 @@ class WorldMapApp:
             self.canvas.create_oval(x - 5, y - 5, x + 5, y + 5, fill="red", tags=("city_marker", city))
 
     def draw_lines(self):
-        city_names = self.city_entry.get().split(',')
+        f = open("result.txt", "r")
+        f = f.readlines()
+        city_names = f[0].split(",")
+        #city_names = self.city_entry.get().split(',')
         city_names = [city.strip() for city in city_names]
 
         if len(city_names) == 4 and all(city in self.cities for city in city_names):
             self.canvas.delete("line")
-            total_distance = 0
+            total_distance = float(f[1])
 
-        for i in range(3):
-            city1 = self.cities[city_names[i]]
-            city2 = self.cities[city_names[i + 1]]
-            x1, y1 = self.convert_coordinates_to_canvas(city1)
-            x2, y2 = self.convert_coordinates_to_canvas(city2)
-            self.canvas.create_line(x1, y1, x2, y2, fill=self.line_color, tags="line", width=2)
+            for i in range(3):
+                city1 = self.cities[city_names[i]]
+                city2 = self.cities[city_names[i + 1]]
+                x1, y1 = self.convert_coordinates_to_canvas(city1)
+                x2, y2 = self.convert_coordinates_to_canvas(city2)
+                self.canvas.create_line(x1, y1, x2, y2, fill=self.line_color, tags="line", width=2)
 
-            distance = geodesic(city1, city2).kilometers
-            total_distance += distance
+                # distance = geodesic(city1, city2).kilometers
+                # total_distance += distance
 
-            self.city_info_label.config(text=f"Total Distance: {total_distance:.2f} km")
+                self.city_info_label.config(text=f"Total Time: {total_distance:.2f} ms")
         else:
             self.city_info_label.config(text="Invalid input. Please enter 4 valid city names.")
 
