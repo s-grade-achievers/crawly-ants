@@ -1,2 +1,2 @@
-seattle,taiwan,hongKong,singapore,chennai,
-220.949982
+jakarta,singapore,mumbai,cairo,marseille,madrid,
+297.179993
