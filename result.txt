@@ -1,2 +1,2 @@
-jakarta,singapore,mumbai,cairo,marseille,madrid,
-297.179993
+jakarta,singapore,mumbai,cairo,
+243.649994
