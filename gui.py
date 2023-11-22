@@ -145,7 +145,7 @@ class WorldMapApp:
     def clear_lines(self):
         self.canvas.delete("line")
         self.city_info_label.config(text="")
-        self.city_entry.delete(0, tk.END)
+        # self.city_entry.delete(0, tk.END)
 
     def choose_line_color(self):
         color = colorchooser.askcolor(title="Choose Line Color")[1]

@@ -1,2 +1,2 @@
-jakarta,singapore,mumbai,cairo,
-243.649994
+caracas,miami,new york,paris,marseille,johannesburg,nairobi,
+389.650024
