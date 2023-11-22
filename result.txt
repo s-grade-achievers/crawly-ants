@@ -1,2 +1,2 @@
-caracas,miami,new york,paris,marseille,johannesburg,nairobi,
-389.650024
+johannesburg,marseille,paris,london,dublin,
+183.860016
