@@ -32,7 +32,6 @@ class WorldMapApp:
         self.city_info_label = ttk.Label(root, text="")
         self.city_info_label.pack()
 
-
     def load_map_image(self, file_path=None):
         if not file_path:
             file_path = "photo1700569249.jpeg"  # Set the default image path here
@@ -102,6 +101,15 @@ class WorldMapApp:
 
             self.canvas.create_oval(
                 x - 5, y - 5, x + 5, y + 5, fill="red", tags=("city_marker", city)
+            )
+
+            self.canvas.create_text(
+                x,
+                y - 10,
+                text=city,
+                fill="black",
+                font=("Arial", 8),
+                tags=("city_label", city),
             )
 
     def draw_lines(self):
