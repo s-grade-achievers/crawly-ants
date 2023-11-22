@@ -1,2 +1,2 @@
-jakarta,singapore,chennai,delhi
-284.390015
+Hong Kong,taiwan,seattle,des moines,miami,
+238.399979

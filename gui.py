@@ -108,14 +108,16 @@ class WorldMapApp:
         f = open("result.txt", "r")
         f = f.readlines()
         city_names = f[0].split(",")
+        city_names = city_names[:-1]
         #city_names = self.city_entry.get().split(',')
         city_names = [city.strip() for city in city_names]
-
-        if len(city_names) == 4 and all(city in self.cities for city in city_names):
+        print(city_names)
+        # if len(city_names) == 0 and all(city in self.cities for city in city_names):
+        if True:
             self.canvas.delete("line")
             total_distance = float(f[1])
 
-            for i in range(3):
+            for i in range(len(city_names) - 1):
                 city1 = self.cities[city_names[i]]
                 city2 = self.cities[city_names[i + 1]]
                 x1, y1 = self.convert_coordinates_to_canvas(city1)
