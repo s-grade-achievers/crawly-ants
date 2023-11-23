@@ -5,6 +5,10 @@
 #include <math.h>
 #include "random.h"
 
+#define DEFAULT_SERVICE_RATE 320
+#define MAX_ROUTERS 8
+#define ROUTER_RANGE 5
+
 typedef struct NODE
 {
     char src[30];
@@ -49,14 +53,11 @@ ACO *connectcities(char x[], char y[], ACO *aco, Randoms *randoms)
         b = (int)y[1] - 48;
     else
         b = atoi(y);
-    // printf("%s %s %d %d\n", x, y, a, b);
 
     if (aco->GRAPH[a][b] != 1)
     {
         aco->GRAPH[a][b] = 1;
         aco->GRAPH[b][a] = 1;
-        aco->PHEROMONES[a][b] = Uniforme(randoms) * aco->TAUMAX;
-        aco->PHEROMONES[b][a] = aco->PHEROMONES[a][b];
     }
     return aco;
 }
@@ -309,7 +310,7 @@ int valid(ACO *aco, int antk, int iteration)
         int cityj = aco->ROUTES[antk][i + 1];
         if (cityi < 0 || cityj < 0)
         {
-            printf("%d %d", cityi, cityj);
+            // printf("%d %d", cityi, cityj);
             return -1;
         }
         if (!exists(aco, cityi, cityj))
@@ -365,16 +366,16 @@ void optimize(ACO *aco, int ITERATIONS, Randoms *r)
         for (int k = 0; k < aco->NUMBEROFANTS; k++)
         {
             printf(": ant %d has been released!\n", k);
-            while (0 != valid(aco, k, iterations))
-            {
-                // printf("%d\n", valid(aco, k, iterations));
-                printf(":: releasing ant %d again!\n", k);
-                for (int i = 0; i < aco->NUMBEROFCITIES; i++)
-                {
-                    aco->ROUTES[k][i] = -1;
-                }
-                route(aco, k, r);
-            }
+            // while (0 != valid(aco, k, iterations))
+            // {
+            //     // printf("%d\n", valid(aco, k, iterations));
+            //     printf(":: releasing ant %d again!\n", k);
+            //     for (int i = 0; i < aco->NUMBEROFCITIES; i++)
+            //     {
+            //         aco->ROUTES[k][i] = -1;
+            //     }
+            //     route(aco, k, r);
+            // }
 
             for (int i = 0; i < aco->NUMBEROFCITIES; i++)
             {
@@ -412,20 +413,51 @@ void optimize(ACO *aco, int ITERATIONS, Randoms *r)
     }
 }
 
+typedef struct noder
+{
+    int ID;
+    int servRate;
+    int inpRate;
+    int posX;
+    int posY;
+    int TR;
+    double enrg;
+    double depth;
+    double ratio;
+    int neighSet[MAX_ROUTERS];
+} noder;
+
+noder routers[MAX_ROUTERS];
+int visite[MAX_ROUTERS];
+
+void findNeighbors(int nR)
+{
+    int i = 0;
+    for (; i < nR; i++)
+    {
+        int j = i + 1;
+        for (; j < nR; j++)
+        {
+            double dist = sqrt(pow((routers[i].posX - routers[j].posX), 2.0) + pow((routers[i].posY - routers[j].posY), 2.0));
+            if (dist <= routers[i].TR)
+            {
+                routers[i].neighSet[j] = 1;
+                routers[j].neighSet[i] = 1;
+            }
+        }
+    }
+}
+
 int main()
 {
     Randoms r;
     initRandoms(&r, 42);
-
+    srand(42);
     ACO *aco = (ACO *)malloc(sizeof(ACO));
     aco = initACO(aco, 43, 43, 0.5, 2.0, 1.0, 1.0, 1.0, 3);
     FILE *file = fopen("newer.csv", "r");
     if (file == NULL)
     {
-        typedef struct Randoms
-        {
-            long xpto;
-        } Randoms;
         perror("Error opening the file");
         return 1;
     }
@@ -437,11 +469,45 @@ int main()
         graph->adjacency_list[i] = (node *)malloc(graph->V * sizeof(node));
     }
     putdata(graph, file, aco, &r);
-    // printf("%f %f %f", aco->PHEROMONES[0][3], aco->PHEROMONES[0][1], graph->adjacency_list[0][0].weight);
-    int ITERATIONS = 10; // Change this to the desired number of iterations
 
-    optimize(aco, ITERATIONS, &r);
+    int noRtrs = MAX_ROUTERS;
+    printf("No of Nodes: %d\n", noRtrs);
 
-    aco = freeACO(aco);
+    int i;
+
+    for (i = 1; i < noRtrs; i++)
+    {
+        int tempIR, tempX, tempY;
+        double tempD, tempE;
+        tempIR = rand() % 212 + 32;
+        tempX = rand() % 6 + 1;
+        tempY = rand() % 6 + 1;
+        tempE = rand() % 100 + 1;
+        tempD = rand() % 10 + 1;
+        noder temp = {i, tempIR, tempX, tempY, DEFAULT_SERVICE_RATE, ROUTER_RANGE, tempE, tempD, tempE / tempD};
+        routers[i] = temp;
+    }
+
+    int srcID = 0;
+    printf("\n Source Node: %d", srcID);
+
+    int destID = 6;
+    printf("\n Destination Node: %d\n", destID);
+
+    findNeighbors(noRtrs);
+
+    for (int i = 0; i < noRtrs; i++)
+    {
+        printf("\n Neighbour Of %d: ", i);
+        for (int j = 0; j < noRtrs; j++)
+        {
+            if (routers[i].neighSet[j] == 1)
+            {
+                printf(" %d", j);
+            }
+        }
+    }
+
+    optimize(aco, 10, &r);
     return 0;
 }
