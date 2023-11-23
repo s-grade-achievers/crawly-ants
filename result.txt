@@ -1,2 +1,2 @@
-johannesburg,marseille,paris,london,dublin,
-183.860016
+hongKong,singapore,chennai,delhi,moscow,
+307.979980
