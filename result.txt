@@ -1,2 +1,2 @@
-lisbon,madrid,paris,london,dublin,
-51.500000
+hongKong,singapore,mumbai,nairobi,johannesburg,
+408.880005
