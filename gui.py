@@ -11,7 +11,7 @@ class WorldMapApp:
         self.root = root
         self.root.title("World Map")
         self.root.attributes("-fullscreen", True)  # Set fullscreen attribute
-        self.canvas = tk.Canvas(root, width=800, height=600)
+        self.canvas = tk.Canvas(root, width=1200, height=600)
         self.canvas.pack()
         self.cities = {}
         self.line_color = "blue"
@@ -38,7 +38,7 @@ class WorldMapApp:
 
         try:
             self.map_image = Image.open(file_path)
-            self.map_image = self.map_image.resize((800, 600), Image.LANCZOS)
+            self.map_image = self.map_image.resize((1200, 600), Image.LANCZOS)
             self.map_photo = ImageTk.PhotoImage(self.map_image)
             self.canvas.create_image(0, 0, anchor=tk.NW, image=self.map_photo)
             self.canvas.delete("city_marker")
